@@ -1,0 +1,55 @@
+#include<stdio.h>
+#include<conio.h>
+#include<graphics.h>
+#include<dos.h>
+ 
+void drawCircle(int xc, int yc, int x, int y)
+{
+    
+	putpixel(xc + x, yc + y, 1);
+	putpixel(xc + y, yc + x, 2);
+	putpixel(xc - y, yc + x, 3);
+	putpixel(xc - x, yc + y, 4);
+	putpixel(xc - x, yc - y, 5);
+	putpixel(xc - y, yc - x, 6);
+	putpixel(xc + y, yc - x, 7);
+	putpixel(xc + x, yc - y, 8);
+ }
+ 
+ void circleBresenham(int xc, int yc, int r)
+ {
+	 int x=0;
+	 int y=r;
+	 int d=3-2*r;
+	 drawCircle(xc, yc, x, y);
+	 while(y>=x)
+	 {
+		 x++;
+		 if(d>0)
+		 {
+			 y--;
+			 d=d+4*(x-y)+10;
+		 }
+		 else
+		 {
+			 d=d+4*x+6;
+			 drawCircle(xc, yc, x, y);
+			 delay(50);
+		 }
+	 }
+ }
+
+int main()
+{
+	int gdriver=DETECT, gmode, xc, yc, r;
+	clrscr();
+	initgraph(&gdriver, &gmode, "c:\\turboc3\\bgi");
+ 
+	printf("Enter the Center xc and yc: ");
+	scanf("%d%d",&xc,&yc);
+ 	printf("Enter radius r of circle: ");
+	scanf("%d", &r);
+ 
+	circleBresenham(xc, yc, r);
+	getch();
+}
