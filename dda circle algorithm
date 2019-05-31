@@ -1,36 +1,27 @@
 #include<stdio.h>
 #include<conio.h>
 #include<graphics.h>
-#include<dos.h>
+#include<math.h>
 void main()
 {
- int x,y,y1,x1,y2,x2,dx,dy;
- int Xinc,Yinc;
- int i,m;
- int gdriven=DETECT,gmode;
- initgraph(&gdriven,&gmode,"c:\\tc\\bgi");
- printf("Enter the first coordinate");
- scanf("%d%d",&x1,&y1);
- printf("Enter the second coordinate");
- scanf("%d%d",&x2,&y2);
- dx=x2-x1;
- dy=y2-y1;
- if(dx>dy)
-  m=dx;
- else
-  m=dy;
- Xinc=dx/m;
- Yinc=dy/m;
- x=x1;
- y=y1;
- putpixel(x,y,7);
- for(i=1;i<=m;i++)
- {
-  x=x+Xinc;
-  y=y+Yinc;
-  putpixel(x,y,7);
- }
-  delay(100);
-
-  getch();
+ int gdriver=DETECT,gmode,errorcode,tmp,i=1,rds;
+ float st_x,st_y,x1,x2,y1,y2,ep;
+ clrscr();
+ initgraph(&gdriver,&gmode,"C:\\TurboC3\\BGI");
+       printf("Enter Radius:");
+ scanf("%d",&rds);
+ while(rds>pow(2,i))
+  i++;
+   ep=1/pow(2,i);
+ x1=rds;  y1=0;
+ st_x=rds; st_y=0;
+ do
+ { x2=x1+(y1*ep);
+  y2=y1-(x2*ep);
+  putpixel(x2+200,y2+200,10); 
+  x1=x2;
+  y1=y2;
+ }while((y1-st_y)<ep || (st_x-x1)>ep);
+    getch();
 }
+ 
