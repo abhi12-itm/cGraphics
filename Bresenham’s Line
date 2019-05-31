@@ -1,0 +1,37 @@
+#include<stdio.h>
+#include<conio.h>
+#include<graphics.h>
+#include<dos.h>
+void main()
+{
+ int x,y,y1,x1,y2,x2,dx,dy;
+ int Xinc,Yinc;
+ int i,p;
+ int gdriven=DETECT,gmode;
+ initgraph(&gdriven,&gmode,"c:\\turboc3\\bgi");
+ printf("Enter the first coordinates");
+ scanf("%d%d",&x1,&y1);
+ printf("Enter the second coordinates");
+ scanf("%d%d",&x2,&y2);
+ dx=x2-x1;
+ dy=y2-y1;
+ x=x1;
+ y=y1;
+ p=2*dy-dx;
+ while(x<x2)
+ {
+	 if(p>=0)
+	 {
+		   putpixel(x,y,5);
+			y=y+1;
+			p=p+2*dy-2*dx;
+	 }
+	 else
+	 {
+		 putpixel(x,y,5);
+		 p=p+2*dy;
+	 }
+	 x++;
+ }
+   getch();
+}
